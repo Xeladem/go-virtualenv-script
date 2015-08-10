@@ -10,7 +10,17 @@ export PATH=$GOPATH/bin:$PATH
 
 alias gcd="cd $GOPATH"
 
-GOARCHIVE="go1.4.linux-amd64.tar.gz"
+arch_output=$(uname -m)
+
+ARCH="386"
+
+if [ $arch_output == "x86_64" ]; then
+   ARCH="amd64"
+fi
+
+
+GOURL=$(curl https://golang.org/dl/ 2> /dev/null | grep "linux-$ARCH.tar.gz" | head -n1 | cut -d "\"" -f4)
+GOARCHIVE=$(basename $GOURL)
 
 deactivate() {
         export PS1=$OLDPS1
@@ -33,7 +43,7 @@ fi
 #Download go
 if [ ! -d $GOPATH/bin/go ];
 then
-    wget "https://storage.googleapis.com/golang/$GOARCHIVE" -P $GOPATH/bin
+    wget $GOURL -P $GOPATH/bin
     tar -C $GOPATH/bin -xzf $GOPATH/bin/$GOARCHIVE
     rm $GOPATH/bin/$GOARCHIVE
 fi
