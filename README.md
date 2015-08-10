@@ -1,5 +1,7 @@
 # go-virtualenv-script
-Script for download Go and activate a python like virtualenv. This is a working draft with plenty of bugs so feel free to fork it :D .  
+Script for download Go and activate a python-like virtualenv.
+
+This is a working draft with plenty of bugs so feel free to fork it :D .  
 
 #### Usage
 Just put the file at the root of the new project and execute this command to activate the virtualenv:
